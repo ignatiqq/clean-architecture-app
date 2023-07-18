@@ -1,0 +1,1 @@
+export type HTTPResponseType<T> = Promise<T>;
