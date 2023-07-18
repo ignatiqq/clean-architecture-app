@@ -1,15 +1,34 @@
-import { HTTPResponseType } from "../typescript"
 import { Cart } from "./cart/models/cart"
+import { ICoupon } from "./coupons/models/coupon"
 import { Product } from "./product/models/product"
 
 type DatabaseType = {
     products: Product[],
     cart: Record<UserId, Cart>,
+    coupons: ICoupon[],
+    users: any;
 }
+
+const coupons: ICoupon[] = [
+    {
+        id: 123,
+        code: 'DISCOUNT550',
+        discount: 550,
+        currency: 'rubles'
+    },
+    {
+        id: 456,
+        code: 'WELCOME1000',
+        discount: 1000,
+        currency: 'rubles'
+    },
+]
 
 const database: DatabaseType = {
     products: [],
     cart: {},
+    users: [],
+    coupons,
 }
 
 const sleep = async (ms: number): Promise<void> => {
@@ -20,7 +39,7 @@ const sleep = async (ms: number): Promise<void> => {
 
 type DatabaseCallbackType<T> = (db: DatabaseType) => T;
 
-export const modifyData = async <T>(cb: DatabaseCallbackType<T>) => {
+export const dataController = async <T>(cb: DatabaseCallbackType<T>) => {
     await sleep(200);
     return cb(database);
 }

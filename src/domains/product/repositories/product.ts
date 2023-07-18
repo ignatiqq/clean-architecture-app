@@ -1,5 +1,8 @@
+import { Product } from "../models/product";
 
-export interface ProductRepository {
-    getProductData: (productId: number) => void;
-    getProductFinalPrice: (productId: number) => void;
+export type CurrencyType = 'euro' | 'dollars' | 'rubles';
+
+export interface IProductRepository {
+    getProductData: (productId: ProductId) => Promise<Product | null>;
+    getAllProductsData: () => Promise<Product[]>;
 }

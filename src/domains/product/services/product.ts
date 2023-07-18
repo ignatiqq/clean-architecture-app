@@ -1,13 +1,17 @@
-import { ProductRepository } from "../repositories/product";
+import { IProductRepository } from "../repositories/product";
 
 export class ProductService {
-    constructor(readonly repository: ProductRepository) {}
+    constructor(readonly repository: IProductRepository) {}
 
-    getProductData(id: number) {
-        return this.repository.getProductData(id);
+    async getProductData(productId: ProductId) {
+        return this.repository.getProductData(productId);
     }
 
-    getProductFinalPrice(id: number) {
-        return this.repository.getProductFinalPrice(id);
+    async getAllProductData() {
+        return this.repository.getAllProductsData();
+    }
+
+    async getProductFinalPrice(userId: UserId, productId: ProductId) {
+        return await this.repository.getProductData(productId);
     }
 }

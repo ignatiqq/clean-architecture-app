@@ -25,15 +25,15 @@ export class CartController {
         }
     }
 
-    public addToCart(product: Product): void {
+    public addToCart(userId: UserId, product: Product): void {
         this.products.push(product);
-        this.cartService.addProduct(product);
+        this.cartService.addProduct(userId, product);
     }
 
-    public async removeFromCart(id: ProductId) {
+    public async removeFromCart(userId: UserId, productId: ProductId) {
         try {
-            this.products.filter(product => product.id !== id);
-            await this.cartService.removeFromCart(id);
+            this.products.filter(product => product.id !== productId);
+            await this.cartService.removeFromCart(userId, productId);
         } catch (error) {
             this.error = error as Error;
         }
