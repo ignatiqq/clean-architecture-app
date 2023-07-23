@@ -7,5 +7,6 @@ export type DataForCouponRequest = {
 }
 
 export interface ICouponRepository {
-    getCoupon: (data: DataForCouponRequest) => Promise<ICoupon | null>
+    getCoupon: (data: DataForCouponRequest) => Promise<ICoupon | {error: string}>;
+    getFallbackCoupon: (data: DataForCouponRequest) => Promise<ICoupon | {error: string}>
 }

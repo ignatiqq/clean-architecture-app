@@ -1,5 +1,5 @@
 import { User } from "../models/user";
 
-export interface UserRepository {
-    getUserData(id: number): User;
+export interface IUserRepository {
+    getUserData(id: UserId): Promise<User | {error: string}>;
 }

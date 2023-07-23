@@ -1,18 +1,19 @@
-import { User } from "../models/user";
-import { UserRepository } from "../repositories/userRepository";
+import { IUserRepository } from "../repositories/userRepository";
 
 export class UserService {
-    constructor(readonly repository: UserRepository){}
+    constructor(readonly repository: IUserRepository){}
 
-    getUserData(id: number) {
-        return this.repository.getUserData(id);
-    }
+    async getUserData(userId: UserId) {
+        try {
+            const response = this.repository.getUserData(userId);
 
-    hasAllergy(user: User, ingridient: string) {
-        return user.allergies.includes(ingridient);
-    }
+            if('error' in response) {
+                return {error: 'Такого пользователя не существует'};
+            }
 
-    hasPreference(user: User, ingridient: string) {
-        return user.preferences.includes(ingridient);
+            return response;
+        } catch (error) {
+            return {error: 'Такого пользователя не существует'};
+        }
     }
 }

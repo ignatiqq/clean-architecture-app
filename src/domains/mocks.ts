@@ -1,15 +1,22 @@
 import { Cart } from "./cart/models/cart"
 import { ICoupon } from "./coupons/models/coupon"
 import { Product } from "./product/models/product"
+import { User } from "./user/models/user";
 
 type DatabaseType = {
     products: Product[],
     cart: Record<UserId, Cart>,
     coupons: ICoupon[],
-    users: any;
+    users: User[];
 }
 
 const coupons: ICoupon[] = [
+    {
+        id: 1,
+        code: 'BASE10',
+        discount: 10,
+        currency: 'euro'
+    },
     {
         id: 123,
         code: 'DISCOUNT550',
